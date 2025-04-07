@@ -140,3 +140,31 @@ func GetDamageType(enumValue int) types.DamageType {
 		return ""
 	}
 }
+
+type EquippingBlockTypes interface {
+	~int64 | ~string
+}
+
+func GetEquippingSlot[T EquippingBlockTypes](enumValue T) types.EquipmentSlot {
+	value := any(enumValue)
+	if v, ok := value.(int64); ok {
+		switch v {
+		case 1498876634:
+			return types.PRIMARY
+		case 2465295065:
+			return types.SPECIAL
+		case 953998645:
+			return types.HEAVY
+		}
+	} else if s, ok := value.(string); ok {
+		switch strings.ToLower(s) {
+		case "kinetic weapons":
+			return types.PRIMARY
+		case "energy weapons":
+			return types.SPECIAL
+		case "power weapons":
+			return types.HEAVY
+		}
+	}
+	return ""
+}

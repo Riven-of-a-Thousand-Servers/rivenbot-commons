@@ -231,8 +231,74 @@ func TestGetDamageType(t *testing.T) {
 			// when: GetDamageType is called
 			result := GetDamageType(input.Value)
 
+			// then: the result should match the expected output
 			if result != input.Expected {
 				t.Fatalf("Expected: %s. Got: %s", input.Expected, result)
+			}
+		})
+	}
+}
+
+type EquipmentSlotTestCase[T EquippingBlockTypes] struct {
+	Input    T
+	Expected types.EquipmentSlot
+}
+
+func TestGetEquippingSlot(t *testing.T) {
+	stringTests := []EquipmentSlotTestCase[string]{
+		{
+			Input:    "KinetiC weapOns",
+			Expected: types.PRIMARY,
+		},
+		{
+			Input:    "EneRgY WeapOns",
+			Expected: types.SPECIAL,
+		},
+		{
+			Input:    "PowEr WeaPONs",
+			Expected: types.HEAVY,
+		},
+		{
+			Input:    "ESome Typo",
+			Expected: "",
+		},
+	}
+
+	for _, testcase := range stringTests {
+		t.Run(fmt.Sprintf("Input: %v", testcase.Input), func(t *testing.T) {
+			// when: GetEquippingSlot is called
+			result := GetEquippingSlot(testcase.Input)
+
+			// then: the result should match the expected output
+			if result != testcase.Expected {
+				t.Fatalf("Expected: %v. Actual: %v", testcase.Expected, result)
+			}
+		})
+	}
+
+	intTests := []EquipmentSlotTestCase[int64]{
+		{
+			Input:    1498876634,
+			Expected: types.PRIMARY,
+		},
+		{
+			Input:    2465295065,
+			Expected: types.SPECIAL,
+		},
+		{
+			Input:    953998645,
+			Expected: types.HEAVY,
+		},
+	}
+
+	for _, testcase := range intTests {
+		t.Run(fmt.Sprintf("Input: %v", testcase.Input), func(t *testing.T) {
+			// when: GetEquippingSlot is called
+			result := GetEquippingSlot(testcase.Input)
+
+			// then: the result should match the expected output
+			if result != testcase.Expected {
+				t.Fatalf("Expected: %v. Actual: %v", testcase.Expected, result)
 			}
 		})
 	}
