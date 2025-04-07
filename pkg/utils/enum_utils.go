@@ -121,3 +121,22 @@ func GetRaidAndDifficulty(label string) (types.RaidName, types.RaidDifficulty, e
 
 	return raidName, raidDifficulty, nil
 }
+
+func GetDamageType(enumValue int) types.DamageType {
+	switch enumValue {
+	case 1:
+		return types.KINETIC
+	case 2:
+		return types.ARC
+	case 3:
+		return types.SOLAR
+	case 4:
+		return types.VOID
+	case 6:
+		return types.STASIS
+	case 7:
+		return types.STRAND
+	default:
+		return ""
+	}
+}

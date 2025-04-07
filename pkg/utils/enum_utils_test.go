@@ -184,3 +184,56 @@ func TestGetRaidAndDifficulty_Success(t *testing.T) {
 		})
 	}
 }
+
+type DamageTypeTest struct {
+	Value    int
+	Expected types.DamageType
+}
+
+var damageTypeInputs = map[string]DamageTypeTest{
+	"kinetic damage test": {
+		Value:    1,
+		Expected: types.KINETIC,
+	},
+	"arc damage test": {
+		Value:    2,
+		Expected: types.ARC,
+	},
+	"solar damage test": {
+		Value:    3,
+		Expected: types.SOLAR,
+	},
+	"void damage test": {
+		Value:    4,
+		Expected: types.VOID,
+	},
+	"stasis damage test": {
+		Value:    6,
+		Expected: types.STASIS,
+	},
+	"strand damage test": {
+		Value:    7,
+		Expected: types.STRAND,
+	},
+	"zero damage test": {
+		Value:    0,
+		Expected: "",
+	},
+	"raids? damage test": {
+		Value:    5,
+		Expected: "",
+	},
+}
+
+func TestGetDamageType(t *testing.T) {
+	for test, input := range damageTypeInputs {
+		t.Run(test, func(t *testing.T) {
+			// when: GetDamageType is called
+			result := GetDamageType(input.Value)
+
+			if result != input.Expected {
+				t.Fatalf("Expected: %s. Got: %s", input.Expected, result)
+			}
+		})
+	}
+}
