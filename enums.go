@@ -1,4 +1,4 @@
-package types
+package commons
 
 type CharacterClass string
 
@@ -54,4 +54,15 @@ const (
 	PRIMARY EquipmentSlot = "Primary"
 	SPECIAL EquipmentSlot = "Special"
 	HEAVY   EquipmentSlot = "Heavy"
+)
+
+type ClearType string
+
+const (
+	SOLO          ClearType = "Solo"
+	DUO           ClearType = "Duo"
+	TRIO          ClearType = "Trio"
+	SOLO_FLAWLESS ClearType = "Solo Flawless"
+	DUO_FLAWLESS  ClearType = "Duo Flawless"
+	TRIO_FLAWLESS ClearType = "Trio Flawless"
 )

@@ -1,4 +1,4 @@
-package types
+package commons
 
 type PostGameCarnageReportResponse struct {
 	Response        PostGameCarnageReport `json:"Response"`

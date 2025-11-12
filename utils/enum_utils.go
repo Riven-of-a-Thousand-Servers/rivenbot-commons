@@ -7,17 +7,17 @@ import (
 	"strings"
 	"sync"
 
-	types "github.com/Riven-of-a-Thousand-Servers/rivenbot-commons/pkg/types"
+	"github.com/Riven-of-a-Thousand-Servers/rivenbot-commons"
 )
 
-var reverseClassLabels map[string]types.CharacterClass
-var characterClassLabels = map[types.CharacterClass]string{
-	types.TITAN:   "Titan",
-	types.WARLOCK: "Warlock",
-	types.HUNTER:  "Hunter",
+var reverseClassLabels map[string]commons.CharacterClass
+var characterClassLabels = map[commons.CharacterClass]string{
+	commons.TITAN:   "Titan",
+	commons.WARLOCK: "Warlock",
+	commons.HUNTER:  "Hunter",
 }
 
-func ClassLabel(c types.CharacterClass) string {
+func ClassLabel(c commons.CharacterClass) string {
 	if label, exists := characterClassLabels[c]; exists {
 		return label
 	} else {
@@ -25,25 +25,25 @@ func ClassLabel(c types.CharacterClass) string {
 	}
 }
 
-var reverseRaidLabels map[string]types.RaidName
-var raidNameLabels = map[types.RaidName]string{
-	types.SALVATIONS_EDGE:     "Salvation's Edge",
-	types.CROTAS_END:          "Crota's End",
-	types.ROOT_OF_NIGHTMARES:  "Root of Nightmares",
-	types.KINGS_FALL:          "King's Fall",
-	types.VOW_OF_THE_DISCIPLE: "Vow of the Disciple",
-	types.VAULT_OF_GLASS:      "Vault of Glass",
-	types.DEEP_STONE_CRYPT:    "Deep Stone Crypt",
-	types.GARDEN_OF_SALVATION: "Garden of Salvation",
-	types.CROWN_OF_SORROW:     "Crown of Sorrow",
-	types.LAST_WISH:           "Last Wish",
-	types.SPIRE_OF_STARS:      "Leviathan, Spire of Stars",
-	types.EATER_OF_WORLDS:     "Leviathan, Eater of Worlds",
-	types.LEVIATHAN:           "Leviathan",
-	types.SCOURGE_OF_THE_PAST: "Scourge of the Past",
+var reverseRaidLabels map[string]commons.RaidName
+var raidNameLabels = map[commons.RaidName]string{
+	commons.SALVATIONS_EDGE:     "Salvation's Edge",
+	commons.CROTAS_END:          "Crota's End",
+	commons.ROOT_OF_NIGHTMARES:  "Root of Nightmares",
+	commons.KINGS_FALL:          "King's Fall",
+	commons.VOW_OF_THE_DISCIPLE: "Vow of the Disciple",
+	commons.VAULT_OF_GLASS:      "Vault of Glass",
+	commons.DEEP_STONE_CRYPT:    "Deep Stone Crypt",
+	commons.GARDEN_OF_SALVATION: "Garden of Salvation",
+	commons.CROWN_OF_SORROW:     "Crown of Sorrow",
+	commons.LAST_WISH:           "Last Wish",
+	commons.SPIRE_OF_STARS:      "Leviathan, Spire of Stars",
+	commons.EATER_OF_WORLDS:     "Leviathan, Eater of Worlds",
+	commons.LEVIATHAN:           "Leviathan",
+	commons.SCOURGE_OF_THE_PAST: "Scourge of the Past",
 }
 
-func RaidLabel(rn types.RaidName) string {
+func RaidLabel(rn commons.RaidName) string {
 	if label, exists := raidNameLabels[rn]; exists {
 		return label
 	} else {
@@ -51,13 +51,13 @@ func RaidLabel(rn types.RaidName) string {
 	}
 }
 
-var reverseDifficultyLabels map[string]types.RaidDifficulty
-var raidDifficultyLabels = map[types.RaidDifficulty]string{
-	types.NORMAL:         "Normal",
-	types.PRESTIGE:       "Prestige",
-	types.MASTER:         "Master",
-	types.GUIDED_GAMES:   "Guided Games",
-	types.CHALLENGE_MODE: "Challenge Mode",
+var reverseDifficultyLabels map[string]commons.RaidDifficulty
+var raidDifficultyLabels = map[commons.RaidDifficulty]string{
+	commons.NORMAL:         "Normal",
+	commons.PRESTIGE:       "Prestige",
+	commons.MASTER:         "Master",
+	commons.GUIDED_GAMES:   "Guided Games",
+	commons.CHALLENGE_MODE: "Challenge Mode",
 }
 
 var once sync.Once
@@ -65,17 +65,17 @@ var once sync.Once
 // Initializes the reverse look up maps only once
 func initReverseMaps() {
 	once.Do(func() {
-		reverseDifficultyLabels = make(map[string]types.RaidDifficulty)
+		reverseDifficultyLabels = make(map[string]commons.RaidDifficulty)
 		for raidDifficulty, label := range raidDifficultyLabels {
 			reverseDifficultyLabels[label] = raidDifficulty
 		}
 
-		reverseRaidLabels = make(map[string]types.RaidName)
+		reverseRaidLabels = make(map[string]commons.RaidName)
 		for raidName, label := range raidNameLabels {
 			reverseRaidLabels[label] = raidName
 		}
 
-		reverseClassLabels = make(map[string]types.CharacterClass)
+		reverseClassLabels = make(map[string]commons.CharacterClass)
 		for characterClass, label := range characterClassLabels {
 			reverseClassLabels[label] = characterClass
 		}
@@ -86,7 +86,7 @@ func initReverseMaps() {
 // given a string, e.g., Last Wish should yield both the RaidName LAST_WISH
 // and the RaidDiffculty NORMAL. On the other hand, Salvation's Edge: Master
 // should yield RaidName SALVATIONS_EDGE and RaidDifficulty MASTER
-func GetRaidAndDifficulty(label string) (types.RaidName, types.RaidDifficulty, error) {
+func GetRaidAndDifficulty(label string) (commons.RaidName, commons.RaidDifficulty, error) {
 	initReverseMaps()
 	tokens := strings.Split(label, ":")
 
@@ -102,7 +102,7 @@ func GetRaidAndDifficulty(label string) (types.RaidName, types.RaidDifficulty, e
 	}
 
 	if len(tokens) <= 1 {
-		return raidName, types.NORMAL, nil
+		return raidName, commons.NORMAL, nil
 	}
 
 	difficulty := strings.TrimSpace(tokens[1]) // Default difficulty
@@ -122,48 +122,48 @@ func GetRaidAndDifficulty(label string) (types.RaidName, types.RaidDifficulty, e
 	return raidName, raidDifficulty, nil
 }
 
-func GetDamageType(enumValue int) types.DamageType {
+func GetDamageType(enumValue int) commons.DamageType {
 	switch enumValue {
 	case 1:
-		return types.KINETIC
+		return commons.KINETIC
 	case 2:
-		return types.ARC
+		return commons.ARC
 	case 3:
-		return types.SOLAR
+		return commons.SOLAR
 	case 4:
-		return types.VOID
+		return commons.VOID
 	case 6:
-		return types.STASIS
+		return commons.STASIS
 	case 7:
-		return types.STRAND
+		return commons.STRAND
 	default:
 		return ""
 	}
 }
 
-type EquippingBlockTypes interface {
+type EquippingBlockcommons interface {
 	~int64 | ~string
 }
 
-func GetEquippingSlot[T EquippingBlockTypes](enumValue T) types.EquipmentSlot {
+func GetEquippingSlot[T EquippingBlockcommons](enumValue T) commons.EquipmentSlot {
 	value := any(enumValue)
 	if v, ok := value.(int64); ok {
 		switch v {
 		case 1498876634:
-			return types.PRIMARY
+			return commons.PRIMARY
 		case 2465295065:
-			return types.SPECIAL
+			return commons.SPECIAL
 		case 953998645:
-			return types.HEAVY
+			return commons.HEAVY
 		}
 	} else if s, ok := value.(string); ok {
 		switch strings.ToLower(s) {
 		case "kinetic weapons":
-			return types.PRIMARY
+			return commons.PRIMARY
 		case "energy weapons":
-			return types.SPECIAL
+			return commons.SPECIAL
 		case "power weapons":
-			return types.HEAVY
+			return commons.HEAVY
 		}
 	}
 	return ""

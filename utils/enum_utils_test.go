@@ -4,165 +4,165 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/Riven-of-a-Thousand-Servers/rivenbot-commons/pkg/types"
+	"github.com/Riven-of-a-Thousand-Servers/rivenbot-commons"
 	"github.com/stretchr/testify/assert"
 )
 
 var enumUtilTests = map[string]struct {
 	input      string
-	raid       types.RaidName
-	difficulty types.RaidDifficulty
+	raid       commons.RaidName
+	difficulty commons.RaidDifficulty
 }{
 	"leviathan_normal": {
 		input:      "Leviathan: Normal",
-		raid:       types.LEVIATHAN,
-		difficulty: types.NORMAL,
+		raid:       commons.LEVIATHAN,
+		difficulty: commons.NORMAL,
 	},
 	"leviathan_prestige": {
 		input:      "Leviathan: Prestige",
-		raid:       types.LEVIATHAN,
-		difficulty: types.PRESTIGE,
+		raid:       commons.LEVIATHAN,
+		difficulty: commons.PRESTIGE,
 	},
 	"leviathan_guided_games": {
 		input:      "Leviathan: Guided Games",
-		raid:       types.LEVIATHAN,
-		difficulty: types.GUIDED_GAMES,
+		raid:       commons.LEVIATHAN,
+		difficulty: commons.GUIDED_GAMES,
 	},
 	"eater_of_worlds_normal": {
 		input:      "Leviathan, Eater of Worlds: Normal",
-		raid:       types.EATER_OF_WORLDS,
-		difficulty: types.NORMAL,
+		raid:       commons.EATER_OF_WORLDS,
+		difficulty: commons.NORMAL,
 	},
 	"eater_of_worlds_prestige": {
 		input:      "Leviathan, Eater of Worlds: Prestige",
-		raid:       types.EATER_OF_WORLDS,
-		difficulty: types.PRESTIGE,
+		raid:       commons.EATER_OF_WORLDS,
+		difficulty: commons.PRESTIGE,
 	},
 	"eater_of_worlds_guided_games": {
 		input:      "Leviathan, Eater of Worlds: Guided Games",
-		raid:       types.EATER_OF_WORLDS,
-		difficulty: types.GUIDED_GAMES,
+		raid:       commons.EATER_OF_WORLDS,
+		difficulty: commons.GUIDED_GAMES,
 	},
 	"spire_of_stars_normal": {
 		input:      "Leviathan, Spire of Stars: Normal",
-		raid:       types.SPIRE_OF_STARS,
-		difficulty: types.NORMAL,
+		raid:       commons.SPIRE_OF_STARS,
+		difficulty: commons.NORMAL,
 	},
 	"spire_of_stars_prestige": {
 		input:      "Leviathan, Spire of Stars: Prestige",
-		raid:       types.SPIRE_OF_STARS,
-		difficulty: types.PRESTIGE,
+		raid:       commons.SPIRE_OF_STARS,
+		difficulty: commons.PRESTIGE,
 	},
 	"spire_of_stars_guided_games": {
 		input:      "Leviathan, Spire of Stars: Guided Games",
-		raid:       types.SPIRE_OF_STARS,
-		difficulty: types.GUIDED_GAMES,
+		raid:       commons.SPIRE_OF_STARS,
+		difficulty: commons.GUIDED_GAMES,
 	},
 	"scourge_of_the_past": {
 		input:      "Scourge of the Past",
-		raid:       types.SCOURGE_OF_THE_PAST,
-		difficulty: types.NORMAL,
+		raid:       commons.SCOURGE_OF_THE_PAST,
+		difficulty: commons.NORMAL,
 	},
 	"last_wish": {
 		input:      "Last Wish",
-		raid:       types.LAST_WISH,
-		difficulty: types.NORMAL,
+		raid:       commons.LAST_WISH,
+		difficulty: commons.NORMAL,
 	},
 	"crown_of_sorrow": {
 		input:      "Crown of Sorrow",
-		raid:       types.CROWN_OF_SORROW,
-		difficulty: types.NORMAL,
+		raid:       commons.CROWN_OF_SORROW,
+		difficulty: commons.NORMAL,
 	},
 	"garden_of_salvation": {
 		input:      "Garden of Salvation",
-		raid:       types.GARDEN_OF_SALVATION,
-		difficulty: types.NORMAL,
+		raid:       commons.GARDEN_OF_SALVATION,
+		difficulty: commons.NORMAL,
 	},
 	"deep_stone_crypt": {
 		input:      "Deep Stone Crypt",
-		raid:       types.DEEP_STONE_CRYPT,
-		difficulty: types.NORMAL,
+		raid:       commons.DEEP_STONE_CRYPT,
+		difficulty: commons.NORMAL,
 	},
 	"vault_of_glass_normal": {
 		input:      "Vault of Glass: Standard",
-		raid:       types.VAULT_OF_GLASS,
-		difficulty: types.NORMAL,
+		raid:       commons.VAULT_OF_GLASS,
+		difficulty: commons.NORMAL,
 	},
 	"vault_of_glass_master": {
 		input:      "Vault of Glass: Master",
-		raid:       types.VAULT_OF_GLASS,
-		difficulty: types.MASTER,
+		raid:       commons.VAULT_OF_GLASS,
+		difficulty: commons.MASTER,
 	},
 	"vault_of_glass_challenge": {
 		input:      "Vault of Glass: Challenge Mode",
-		raid:       types.VAULT_OF_GLASS,
-		difficulty: types.CHALLENGE_MODE,
+		raid:       commons.VAULT_OF_GLASS,
+		difficulty: commons.CHALLENGE_MODE,
 	},
 	"vow_of_the_disciple_normal": {
 		input:      "Vow of the Disciple: Standard",
-		raid:       types.VOW_OF_THE_DISCIPLE,
-		difficulty: types.NORMAL,
+		raid:       commons.VOW_OF_THE_DISCIPLE,
+		difficulty: commons.NORMAL,
 	},
 	"vow_of_the_disciple_master": {
 		input:      "Vow of the Disciple: Master",
-		raid:       types.VOW_OF_THE_DISCIPLE,
-		difficulty: types.MASTER,
+		raid:       commons.VOW_OF_THE_DISCIPLE,
+		difficulty: commons.MASTER,
 	},
 	"kings_fall_challenge_mode": {
 		input:      "King's Fall: Expert",
-		raid:       types.KINGS_FALL,
-		difficulty: types.CHALLENGE_MODE,
+		raid:       commons.KINGS_FALL,
+		difficulty: commons.CHALLENGE_MODE,
 	},
 	"kings_fall_normal": {
 		input:      "King's Fall: Standard",
-		raid:       types.KINGS_FALL,
-		difficulty: types.NORMAL,
+		raid:       commons.KINGS_FALL,
+		difficulty: commons.NORMAL,
 	},
 	"kings_fall_master": {
 		input:      "King's Fall: Master",
-		raid:       types.KINGS_FALL,
-		difficulty: types.MASTER,
+		raid:       commons.KINGS_FALL,
+		difficulty: commons.MASTER,
 	},
 	"root_of_nightmares_normal": {
 		input:      "Root of Nightmares: Standard",
-		raid:       types.ROOT_OF_NIGHTMARES,
-		difficulty: types.NORMAL,
+		raid:       commons.ROOT_OF_NIGHTMARES,
+		difficulty: commons.NORMAL,
 	},
 	"root_of_nightmares_master": {
 		input:      "Root of Nightmares: Master",
-		raid:       types.ROOT_OF_NIGHTMARES,
-		difficulty: types.MASTER,
+		raid:       commons.ROOT_OF_NIGHTMARES,
+		difficulty: commons.MASTER,
 	},
 	"crotas_end_challenge_mode": {
 		input:      "Crota's End: Legend",
-		raid:       types.CROTAS_END,
-		difficulty: types.CHALLENGE_MODE,
+		raid:       commons.CROTAS_END,
+		difficulty: commons.CHALLENGE_MODE,
 	},
 	"crotas_end_normal": {
 		input:      "Crota's End: Normal",
-		raid:       types.CROTAS_END,
-		difficulty: types.NORMAL,
+		raid:       commons.CROTAS_END,
+		difficulty: commons.NORMAL,
 	},
 	"crotas_end_master": {
 		input:      "Crota's End: Master",
-		raid:       types.CROTAS_END,
-		difficulty: types.MASTER,
+		raid:       commons.CROTAS_END,
+		difficulty: commons.MASTER,
 	},
 	"salvations_edge_normal": {
 		input:      "Salvation's Edge: Standard",
-		raid:       types.SALVATIONS_EDGE,
-		difficulty: types.NORMAL,
+		raid:       commons.SALVATIONS_EDGE,
+		difficulty: commons.NORMAL,
 	},
 	// This one is a contest mode clear
 	"salvations_edge_normal_2.0": {
 		input:      "Salvation's Edge",
-		raid:       types.SALVATIONS_EDGE,
-		difficulty: types.NORMAL,
+		raid:       commons.SALVATIONS_EDGE,
+		difficulty: commons.NORMAL,
 	},
 	"salvations_edge_master": {
 		input:      "Salvation's Edge: Master",
-		raid:       types.SALVATIONS_EDGE,
-		difficulty: types.MASTER,
+		raid:       commons.SALVATIONS_EDGE,
+		difficulty: commons.MASTER,
 	},
 }
 
@@ -187,33 +187,33 @@ func TestGetRaidAndDifficulty_Success(t *testing.T) {
 
 type DamageTypeTest struct {
 	Value    int
-	Expected types.DamageType
+	Expected commons.DamageType
 }
 
 var damageTypeInputs = map[string]DamageTypeTest{
 	"kinetic damage test": {
 		Value:    1,
-		Expected: types.KINETIC,
+		Expected: commons.KINETIC,
 	},
 	"arc damage test": {
 		Value:    2,
-		Expected: types.ARC,
+		Expected: commons.ARC,
 	},
 	"solar damage test": {
 		Value:    3,
-		Expected: types.SOLAR,
+		Expected: commons.SOLAR,
 	},
 	"void damage test": {
 		Value:    4,
-		Expected: types.VOID,
+		Expected: commons.VOID,
 	},
 	"stasis damage test": {
 		Value:    6,
-		Expected: types.STASIS,
+		Expected: commons.STASIS,
 	},
 	"strand damage test": {
 		Value:    7,
-		Expected: types.STRAND,
+		Expected: commons.STRAND,
 	},
 	"zero damage test": {
 		Value:    0,
@@ -239,24 +239,24 @@ func TestGetDamageType(t *testing.T) {
 	}
 }
 
-type EquipmentSlotTestCase[T EquippingBlockTypes] struct {
+type EquipmentSlotTestCase[T EquippingBlockcommons] struct {
 	Input    T
-	Expected types.EquipmentSlot
+	Expected commons.EquipmentSlot
 }
 
 func TestGetEquippingSlot(t *testing.T) {
 	stringTests := []EquipmentSlotTestCase[string]{
 		{
 			Input:    "KinetiC weapOns",
-			Expected: types.PRIMARY,
+			Expected: commons.PRIMARY,
 		},
 		{
 			Input:    "EneRgY WeapOns",
-			Expected: types.SPECIAL,
+			Expected: commons.SPECIAL,
 		},
 		{
 			Input:    "PowEr WeaPONs",
-			Expected: types.HEAVY,
+			Expected: commons.HEAVY,
 		},
 		{
 			Input:    "ESome Typo",
@@ -279,15 +279,15 @@ func TestGetEquippingSlot(t *testing.T) {
 	intTests := []EquipmentSlotTestCase[int64]{
 		{
 			Input:    1498876634,
-			Expected: types.PRIMARY,
+			Expected: commons.PRIMARY,
 		},
 		{
 			Input:    2465295065,
-			Expected: types.SPECIAL,
+			Expected: commons.SPECIAL,
 		},
 		{
 			Input:    953998645,
-			Expected: types.HEAVY,
+			Expected: commons.HEAVY,
 		},
 	}
 
