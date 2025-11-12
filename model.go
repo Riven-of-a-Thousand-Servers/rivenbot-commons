@@ -2,87 +2,92 @@ package commons
 
 import "time"
 
-type InstanceActivityEntity struct {
+type Activity struct {
+	Hash          int64
+	Label         string
+	NameId        int64
+	DifficultyId  int64
+	IsWorldsFirst bool
+}
+
+type ActivityDifficulty struct {
+	Id    int64
+	Label string
+}
+
+type ActivityName struct {
+	Id          int64
+	Label       string
+	IsActive    bool
+	ReleaseDate time.Time
+}
+
+type DestinyPlayer struct {
+	MembershipId          int64
+	MembershipType        int
+	IconPath              string
+	DisplayName           string
+	GlobalDisplayName     string
+	GlobalDisplayNameCode int
+	TotalClears           int
+	TotalFullClears       int
+	IsPrivate             bool
+	LastCrawled           time.Time
+	LastSeen              time.Time
+}
+
+type Instance struct {
+	Id           int64
+	ActivityHash int64
+	IsFresh      bool
+	Flawless     bool
+	Completed    bool
+	PlayerCount  int
+	Duration     int
+	StartTime    time.Time
+	EndTime      time.Time
+}
+
+type InstancePlayer struct {
+	InstanceId   int64
+	MembershipId int64
+	Completed    bool
+	TimePlayed   int
+}
+
+type InstanceCharacter struct {
+	InstanceId        int64
+	MembershipId      int64
+	CharacterId       int64
+	ClassHash         int64
+	EmblemHash        int64
+	Completed         bool
+	Kills             int
+	Deaths            int
+	Assists           int
+	Kda               float32
+	Kdr               float32
+	SuperKills        int
+	MeleeKills        int
+	GrenadeKills      int
+	Efficiency        int
+	TimePlayedSeconds int
+}
+
+type InstanceCharacterWeapon struct {
 	InstanceId         int64
 	PlayerMembershipId int64
 	PlayerCharacterId  int64
-	CharacterEmblem    int64
-	IsCompleted        bool
-	Kills              int32
-	Deaths             int32
-	Assists            int32
-	MeleeKills         int
-	SuperKills         int
-	GrenadeKills       int
-	KillsDeathsAssists float32
-	KillsDeathsRatio   float32
-	DurationSeconds    int64
-	TimeplayedSeconds  int64
+	WeaponId           int64
+	Kills              int64
+	PrecisionKills     int64
+	PrecisionRatio     float32
 }
 
-type InstanceWeaponStats struct {
-	InstanceId          int64
-	PlayerCharacterId   int64
-	WeaponId            int64
-	TotalKills          int
-	TotalPrecisionKills int
-	PrecisionRatio      float32
-}
-
-type PlayerEntity struct {
-	MembershipId    int64
-	DisplayName     string
-	DisplayNameCode int32
-	MembershipType  int32
-	LastSeen        time.Time
-	Characters      []PlayerCharacterEntity
-}
-
-type PlayerCharacterEntity struct {
-	CharacterId        int64
-	CharacterClass     string
-	CharacterEmblem    int64
-	PlayerMembershipId int64
-}
-
-type PlayerRaidStatsEntity struct {
-	RaidName           RaidName
-	RaidDifficulty     RaidDifficulty
-	PlayerMembershipId int64
-	Kills              int
-	Deaths             int
-	Assists            int
-	HoursPlayed        int
-	Clears             int
-	FullClears         int
-	Flawless           bool
-	ContestClear       bool
-	DayOne             bool
-	Solo               bool
-	Duo                bool
-	Trio               bool
-	SoloFlawless       bool
-	DuoFlawless        bool
-	TrioFlawless       bool
-}
-
-type RaidEntity struct {
-	RaidName       string
-	RaidDifficulty string
-	IsActive       bool
-	ReleaseDate    time.Time
-	RaidHash       int64
-}
-
-type RaidPgcr struct {
-	InstanceId int64
-	Blob       []byte
-}
-
-type WeaponEntity struct {
-	WeaponHash          int64
-	WeaponIcon          string
-	WeaponName          string
-	WeaponDamageType    DamageType
-	WeaponEquipmentSlot EquipmentSlot
+type Weapon struct {
+	Hash          int64
+	IconUrl       string
+	Name          string
+	EquipmentSlot string
+	DamageType    string
 }
